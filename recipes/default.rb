@@ -23,7 +23,7 @@ unless node.recipes.include?("application_balancer::server")
 end
 
 
-if node.run_state[:seen_recipes].include?("rsyslog") || node.run_state[:seen_recipes].include?("rsyslog::default")
+if run_context.loaded_recipe?("rsyslog")
 
   cookbook_file("/etc/rsyslog.d/30-haproxy.conf") do
     source "haproxy.conf"
