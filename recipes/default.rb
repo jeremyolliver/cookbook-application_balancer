@@ -23,7 +23,13 @@ unless node.recipes.include?("application_balancer::server")
 end
 
 
-if node.run_state[:seen_recipes].include?("rsyslog") || node.run_state[:seen_recipes].include?("rsyslog::default")
+if Chef::Version.new(Chef::VERSION).major < 11
+  rsyslog_detected = node.run_state[:seen_recipes].include?("rsyslog") || node.run_state[:seen_recipes].include?("rsyslog::default")
+else
+  rsyslog_detected = run_context.loaded_recipe?("rsyslog")
+end
+
+if rsyslog_detected
 
   cookbook_file("/etc/rsyslog.d/30-haproxy.conf") do
     source "haproxy.conf"
