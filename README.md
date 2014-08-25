@@ -8,6 +8,16 @@ Each config via an LWRP sets a named attribute section meaning multiple recipes 
 
 None of the configuration options are linted or validated, simply passed straight through and written to the haproxy config file, so be warned
 
+Beware / Deprecated
+===================
+
+I will leave this repo available for use, but no further development is planned. This cookbook has notable drawbacks, and potential bug sources due to requiring very strict ordering of run_list. The main use case this cookbook targets, is programmatically defining multiple haproxy frontend/backends - given that haproxy only has a global config file.
+
+Suggested Alternatives:
+
+1. Utilizing separated config files - which makes management of those individual files easier to manage, and using something similar to https://github.com/joewilliams/haproxy_join to join the config files.
+2. Running haproxy, consul, and https://github.com/hashicorp/consul-haproxy. Such a setup would store the backend server IP's for each service in consul. This would additionally allow easier ways to disable one or more servers in a pool - by updating the list in consul, which is noticed by consul-haproxy, which updates the haproxy config and reloads haproxy. This alternative does not solve the problem of how to automate haproxy services into the consul data though.
+
 Requirements
 ============
 
