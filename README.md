@@ -61,6 +61,26 @@ as an array.
       server "#{node.fqdn} 127.0.0.1:7000"
     end
 
+Testing
+=====
+
+Install the Vagrant plugin for Berkshelf:
+
+    vagrant plugin install vagrant-berkshelf
+
+Install the Vagrant plugin for the Chef Omnibus installer:
+
+    vagrant plugin install vagrant-omnibus
+
+To test the recipe fire up Vagrant:
+
+    vargrant up
+    
+When you're done:
+
+    vagrant destroy
+    
+The Vagrantfile has a few options like setting the Chef client version (currently the latest available), setting the base box to use (currently Ubuntu 12.04 x64) or setting the run list and various attributes.  See the Vagrantfile for more infomation.
 
 TODO
 ====
